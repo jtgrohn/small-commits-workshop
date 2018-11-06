@@ -18,8 +18,8 @@ namespace SmallCommitsWorkshopTests.Controllers {
 		private IServiceScope m_scope;
 		private UsersContext m_usersContext;
 		private User[] m_defaultUsers = new User[] {
-				new User() { Id = 42, UserName = "JaneSmith" },
-				new User() { Id = 156, UserName = "JoeSmith" },
+				new User() { Id = 42, UserName = "JaneSmith", IsActive = true },
+				new User() { Id = 156, UserName = "JoeSmith", IsActive = false },
 			};
 
 		[SetUp]
@@ -48,6 +48,7 @@ namespace SmallCommitsWorkshopTests.Controllers {
 						user => new Dictionary<string, object>( 2 ) {
 							{ "id", user.Id },
 							{ "userName", user.UserName },
+							{ "isActive", user.IsActive }
 						}
 					),
 					await response.Content.ReadAsJsonAsync<IDictionary<long, IDictionary<string, object>>>()
@@ -66,7 +67,8 @@ namespace SmallCommitsWorkshopTests.Controllers {
 							user.Id,
 							new Dictionary<string, object>( 2 ) {
 								{ "id", user.Id },
-								{ "userName", user.UserName }
+								{ "userName", user.UserName },
+								{ "isActive", user.IsActive }
 							}
 						}
 					},
