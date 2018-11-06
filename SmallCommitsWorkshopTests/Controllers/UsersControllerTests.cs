@@ -35,8 +35,8 @@ namespace SmallCommitsWorkshopTests.Controllers {
 		[Test]
 		public async Task GetAll_ReturnsUsers() {
 			User[] users = new User[] {
-				new User() { Id = 42, UserName = "JaneSmith" },
-				new User() { Id = 156, UserName = "JoeSmith" },
+				new User() { Id = 42, UserName = "JaneSmith", Buzzword = "ProbablyALady" },
+				new User() { Id = 156, UserName = "JoeSmith", Buzzword = "ProbablyADude" },
 			};
 
 			foreach( User user in users ) {
@@ -51,6 +51,7 @@ namespace SmallCommitsWorkshopTests.Controllers {
 						user => new Dictionary<string, object>( 2 ) {
 							{ "id", user.Id },
 							{ "userName", user.UserName },
+							{ "buzzword", user.Buzzword }
 						}
 					),
 					await response.Content.ReadAsJsonAsync<IDictionary<long, IDictionary<string, object>>>()
