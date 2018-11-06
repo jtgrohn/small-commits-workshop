@@ -13,7 +13,7 @@ namespace SmallCommitsWorkshopTests.Controllers {
 			const string calculatedValue = "Buzz";
 			Mock<IFizzBuzzService> fizzBuzzService = new Mock<IFizzBuzzService>( MockBehavior.Strict );
 			fizzBuzzService
-				.Setup( x => x.Calculate( number ) )
+				.Setup( x => x.Calculate( number, "Fizz", "Buzz" ) )
 				.Returns( calculatedValue );
 
 			using( FizzBuzzController sut = new FizzBuzzController( fizzBuzzService: fizzBuzzService.Object ) ) {
