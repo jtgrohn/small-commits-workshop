@@ -47,12 +47,12 @@ namespace SmallCommitsWorkshopTests.Services {
 			);
 		}
 
-		[TestCase( "Buzz", "Fizz" )]
-		[TestCase( "Tim", "Tam" )]
-		[TestCase( "Apple", "Orange" )]
-		public void Calculate_OverridingDefaultFizzAndBuzzValues_ReturnsNonDefaultValues( string fizz, string buzz ) {
+		[TestCase( 15, "Buzz", "Fizz", "BuzzFizz" )]
+		[TestCase( 3, "Tim", "Tam", "Tim" )]
+		[TestCase( 5, "Apple", "Orange", "Orange" )]
+		public void Calculate_OverridingDefaultFizzAndBuzzValues_ReturnsNonDefaultValues( int value, string fizz, string buzz, string expected ) {
 			Assert.AreEqual(
-				expected: fizz + buzz,
+				expected: expected,
 				actual: m_fizzBuzzService.Calculate( number: 15, fizz: fizz, buzz: buzz )
 			);
 		}
