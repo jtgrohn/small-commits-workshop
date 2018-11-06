@@ -55,6 +55,26 @@ namespace SmallCommitsWorkshopTests.Controllers {
 			}
 		}
 
+		[Test]
+		public async Task Get_ReturnsUser() {
+			User user = m_defaultUsers.First();
+			using( HttpResponseMessage response = await m_client.GetAsync( $"/api/users/{user.Id}" ) ) {
+				Assert.AreEqual( response.StatusCode, HttpStatusCode.OK );
+				CollectionAssert.AreEquivalent(
+					new Dictionary<long, IDictionary<string, object>>( 2 ) {
+						{
+							user.Id,
+							new Dictionary<string, object>( 2 ) {
+								{ "id", user.Id },
+								{ "userName", user.UserName }
+							}
+						}
+					},
+					await response.Content.ReadAsJsonAsync<IDictionary<long, IDictionary<string, object>>>()
+				);
+			}
+		}
+
 		private Task AddUsers( params User[] users ) {
 			m_usersContext.Users.AddRange( users );
 			return m_usersContext.SaveChangesAsync();
